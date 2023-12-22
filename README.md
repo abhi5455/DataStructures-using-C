@@ -1,1 +1,1 @@
-# DataStructures-using-C KTU S3
+# DataStructures using C KTU S3
