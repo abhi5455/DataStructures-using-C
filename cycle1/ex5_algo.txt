@@ -1,0 +1,27 @@
+START OF FUNCTION main():
+    VARIABLE i, j, temp
+    VARIABLE arr[20]
+    VARIABLE count
+
+    PRINT "Enter the Number of elements : "
+    INPUT count
+
+    PRINT "Enter the elements: "
+    FOR i FROM 0 TO count - 1:
+        INPUT arr[i]
+
+    FOR i FROM 0 TO count - 1:
+        FOR j FROM 0 TO count - i - 2:
+            IF *(arr+j) > *(arr+j+1) THEN
+                temp <- *(arr+j);
+                *(arr+j) <- *(arr+j+1);
+                *(arr+j+1) <- temp;
+            END IF
+        END FOR
+    END FOR
+
+    PRINT "The sorted elements are : "
+    FOR i FROM 0 TO count - 1:
+        PRINT *(arr+i) + " "
+    END FOR
+END OF FUNCTION

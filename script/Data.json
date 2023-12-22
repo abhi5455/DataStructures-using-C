@@ -1,0 +1,177 @@
+[
+  {
+    "cycle": 1,
+    "questions": [
+      {
+        "date": "4/10/2023",
+        "title": "Merge two sorted arrays",
+        "question": "Write a C Program to merge the elements of two arrays and to form a single array sorted in ascending order."
+      },
+      {
+        "date": "4/10/2023",
+        "title": "Longest substring",
+        "question": "Given a string s, write a C program to find the length of the longest substring without repeating characters. Also, display the substring."
+      },
+      {
+        "date": "4/10/2023",
+        "title": "Smallest number using pointers",
+        "question": "Write a program to find the smallest number in a list of integers using pointers"
+      },
+      {
+        "date": "4/10/2023",
+        "title": "String functions using pointers",
+        "question": "Implement the following string library functions using pointers:\nstring length\nstring copy\nstring comparison\nstring concatenation"
+      },
+      {
+        "date": "4/10/2023",
+        "title": "Bubble sort using pointers",
+        "question": "Implement bubble sort without using array (Use pointers instead)"
+      }
+    ]
+  },
+  {
+    "cycle": 2,
+    "questions": [
+      {
+        "date": "9/10/2023",
+        "title": "Linear Search",
+        "question": "Implement Linear Search."
+      },
+      {
+        "date": "9/10/2023",
+        "title": "Binary Search",
+        "question": "Implement Binary Search."
+      },
+      {
+        "date": "9/10/2023",
+        "title": "Stack Using Array",
+        "question": "Implement Stack using array."
+      },
+      {
+        "date": "9/10/2023",
+        "title": "String palindrome",
+        "question": "Write a program in C to check whether a string is palindrome or not, using stack."
+      }
+    ]
+  },
+  {
+    "cycle": 3,
+    "questions": [
+      {
+        "date": "14/10/2023",
+        "title": "Infix to Postfix Using Stack",
+        "question": "Use a stack to convert an infix expression to a postfix expression, then evaluate the result."
+      },
+      {
+        "date": "14/10/2023",
+        "title": "Infix to Prefix Using Stack",
+        "question": "Write a program to use a stack to convert an infix expression to a prefix expression."
+      },
+      {
+        "date": "14/10/2023",
+        "title": "Infix to Postfix without Stack",
+        "question": "Convert an infix expression to a postfix expression without using a stack."
+      },
+      {
+        "date": "14/10/2023",
+        "title": "Queue",
+        "question": "Implement a Queue using arrays with operations to insert, delete, and display."
+      },
+      {
+        "date": "14/10/2023",
+        "title": "Circular Queue",
+        "question": "Implement a Circular Queue using arrays with operations to insert, delete, and display."
+      },
+      {
+        "date": "25/10/2023",
+        "title": "Priority Queue",
+        "question": "Implement a Priority Queue using arrays with operations to insert, delete, and display."
+      },
+      {
+        "date": "25/10/2023",
+        "title": "Double Ended Queue",
+        "question": "Implement a Double Ended Queue using arrays with operations to insert, delete, and display elements at both ends of the queue."
+      }
+    ]
+  },
+  {
+    "cycle": 4,
+    "questions": [
+      {
+        "date": "25/10/2023",
+        "title": "Polynomial Addition",
+        "question": "Write a program to read two polynomials and store them in an array. Calculate the sum of the two polynomials and display the first polynomial, second polynomial and the resultant polynomial."
+      },
+      {
+        "date": "20/11/2023",
+        "title": "Sparse Matrix",
+        "question": "Write a program to enter two matrices in normal form. Write a function to convert two matrices to tuple form and display it. Also, find the transpose of the two matrices represented in tuple form and display it. Find the sum of the two matrices in tuple form and display the sum in tuple form."
+      }
+    ]
+  },
+  {
+    "cycle": 5,
+    "questions": [
+      {
+        "date": "20/11/2023",
+        "title": "Singly LinkedList",
+        "question": "Create a menu-driven program to perform operations on a linked list, including display, insertion, deletion, etc."
+      },
+      {
+        "date": "20/11/2023",
+        "title": "Palindrome Using doubly linked list",
+        "question": "Create a doubly linked list from a string and efficiently check if the string is a palindrome."
+      },
+      {
+        "date": "20/11/2023",
+        "title": "Stack using linked list",
+        "question": "Implement a stack using a linked list with operations like push, pop, and display."
+      },
+      {
+        "date": "27/11/2023",
+        "title": "Queue using linked list",
+        "question": "Implement a queue using a linked list with operations like enqueue, dequeue, and display."
+      },
+      {
+        "date": "27/11/2023",
+        "title": "Queue Reversal using stack",
+        "question": "Write a program to reverse the contents of a queue using a stack."
+      },
+      {
+        "date": "27/11/2023",
+        "title": "Polynomial Addition Using Linked List",
+        "question": "Read two polynomials, store them in a linked list, calculate their sum, and display the input and resultant polynomials."
+      },
+      {
+        "date": "1/12/2023",
+        "title": "Polynomial Multiplication Using Linked List",
+        "question": "Read two polynomials, store them in a linked list, calculate their product, and display the input and resultant polynomials."
+      },
+      {
+        "date": "1/12/2023",
+        "title": "Two Variable Polynomial Addition",
+        "question": "Add two polynomials with two variables, stored in a linked list, based on powers of the first and then the second variable."
+      },
+      {
+        "date": "1/12/2023",
+        "title": "Student Record Management",
+        "question": "Create a linked list to store student records (number, name, total mark), and provide functions for insertion, deletion, searching, sorting, and display."
+      }
+    ]
+  },
+  {
+    "cycle": 6,
+    "questions": [
+      {
+        "date": "18/12/2023",
+        "title": "binary tree",
+        "question": "Create a binary tree with the following operations:\n1. Insert a new node\n2. Inorder traversal\n3. Preorder traversal\n4. Postorder traversal\n5. Delete a node"
+      },
+      {
+        "date": "18/12/2023",
+        "title": "Binary search tree",
+        "question": "Write a program to create a binary search tree (data items are integers) with the following operations:\n1. Insert a new node\n2. Inorder traversal\n3. Preorder traversal\n4. Postorder traversal\n5. Delete a node\n6. Find the number of leaf nodes\n7. Sort the input numbers"
+      }
+    ]
+  }
+]

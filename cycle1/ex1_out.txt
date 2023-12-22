@@ -1,0 +1,5 @@
+Enter the no of elements of 1st array: 4
+Enter 4 Elements: 3 4 6 8
+Enter the no of elements of 2nd array: 4
+Enter 4 Elements: 2 6 7 9
+Merged list is: 2 3 4 6 6 7 8 9

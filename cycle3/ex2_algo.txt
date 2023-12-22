@@ -1,0 +1,118 @@
+START OF FUNCTION StrRev(str):
+    INTEGER i <- 0, j <- 0
+    WHILE str[j] <> '\0' DO
+        j <- j + 1
+    END WHILE
+    j <- j - 1
+    WHILE i <= j DO
+        CHARACTER temp <- str[i]
+        str[i] <- str[j]
+        str[j] <- temp
+        i <- i + 1
+        j <- j - 1
+    END WHILE
+END OF FUNCTION
+
+START OF FUNCTION Push(s, top, item):
+    s[top + 1] <- item
+    top <- top + 1
+END OF FUNCTION
+
+START OF FUNCTION CHARACTER Pop(s, top):
+    IF top = -1 THEN
+        RETURN '\0'
+    ELSE
+        top <- top - 1
+        RETURN s[top + 1]
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION BOOLEAN isOperand(ch):
+    RETURN (ch >= 'a' AND ch <= 'z') OR (ch >= 'A' AND ch <= 'Z')
+END OF FUNCTION
+
+START OF FUNCTION BOOLEAN isOperator(ch):
+    RETURN (ch = '+' OR ch = '-' OR ch = '*' OR ch = '/' OR ch = '^')
+END OF FUNCTION
+
+START OF FUNCTION INTEGER ICP(ch):
+    SWITCH ch:
+        CASE '+', '-':
+            RETURN 1
+        CASE '*', '/':
+            RETURN 3
+        CASE '^':
+            RETURN 6
+    END SWITCH
+    RETURN -1
+END OF FUNCTION
+
+START OF FUNCTION INTEGER ISP(ch):
+    SWITCH ch:
+        CASE '+', '-':
+            RETURN 2
+        CASE '*', '/':
+            RETURN 4
+        CASE '^':
+            RETURN 5
+    END SWITCH
+    RETURN -1
+END OF FUNCTION
+
+START OF FUNCTION INTEGER convertInfixToPostfix(infix, postfix):
+    CHARACTER ARRAY Stack[100]
+    CHARACTER curr
+    INTEGER top <- -1, len <- 0, i, j <- 0
+
+    FOR i FROM 1 TO LEN(infix) DO
+        len <- len + 1
+    END FOR
+
+    CALL Push(Stack, top, '(')
+    infix[len + 1] <- ')'
+    infix[len + 2] <- '\0'
+
+    FOR i FROM 1 TO LEN(infix) DO
+        curr <- infix[i]
+        IF curr = ' ' OR curr = '\t' THEN
+            CONTINUE
+        END IF
+
+        IF isOperand(curr) THEN
+            postfix[j] <- curr
+            j <- j + 1
+        ELSE IF curr = '(' THEN
+            CALL Push(Stack, top, curr)
+        ELSE IF isOperator(curr) THEN
+            WHILE top > -1 AND ICP(curr) <= ISP(Stack[top]) DO
+                CHARACTER item <- Pop(Stack, top)
+                postfix[j] <- item
+                j <- j + 1
+            END WHILE
+            CALL Push(Stack, top, curr)
+        ELSE IF curr = ')' THEN
+            WHILE top > -1 AND Stack[top] <> '(' DO
+                CHARACTER item <- Pop(Stack, top)
+                postfix[j] <- item
+                j <- j + 1
+            END WHILE
+            CALL Pop(Stack, top)
+        ELSE
+            RETURN 0
+        END IF
+    END FOR
+
+    postfix[j] <- '\0'
+    RETURN 1
+END OF FUNCTION
+
+START OF FUNCTION main():
+    CHARACTER ARRAY infix[100], prefix[100]
+    PRINT "Enter infix Expression(in the form of variables): "
+    INPUT infix
+
+    CALL StrRev(infix)
+    CALL convertInfixToPostfix(infix, prefix)
+    CALL StrRev(prefix)
+    PRINT "Prefix: " + prefix
+END OF FUNCTION

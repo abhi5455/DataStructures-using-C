@@ -1,0 +1,3 @@
+Enter the no of Elements: 5
+Enter 5 elements: 3 45 53 2 4 3
+Smallest number is 2

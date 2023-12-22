@@ -1,0 +1,114 @@
+STRUCT Node
+    INT coefficient
+    INT exp_x
+    INT exp_y
+    NODE next
+
+START OF FUNCTION NODE InsertTerm(head, coef, exp_x, exp_y)
+    NODE newNode <- ALLOCATE(sizeof(Node))
+    newNode.coefficient <- coef
+    newNode.exp_x <- exp_x
+    newNode.exp_y <- exp_y
+    newNode.next <- NULL
+
+    IF head == NULL THEN
+        head <- newNode
+    ELSE
+        NODE temp <- head
+        WHILE temp.next != NULL
+            temp <- temp.next
+        END WHILE
+        temp.next <- newNode
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION NODE AddPolynomials(poly1, poly2)
+    NODE result <- NULL
+
+    WHILE poly1 != NULL OR poly2 != NULL
+        INT coef1 <- (poly1 != NULL) ? poly1.coefficient : 0
+        INT exp_x_1 <- (poly1 != NULL) ? poly1.exp_x : 0
+        INT exp_y_1 <- (poly1 != NULL) ? poly1.exp_y : 0
+
+        INT coef2 <- (poly2 != NULL) ? poly2.coefficient : 0
+        INT exp_x_2 <- (poly2 != NULL) ? poly2.exp_x : 0
+        INT exp_y_2 <- (poly2 != NULL) ? poly2.exp_y : 0
+
+        IF exp_x_1 > exp_y_1 OR (exp_x_1 == exp_y_1 AND exp_x_2 > exp_y_2) THEN
+            InsertTerm(result, coef1, exp_x_1, exp_x_2)
+            poly1 <- poly1.next
+        ELSE IF exp_x_1 < exp_y_1 OR (exp_x_1 == exp_y_1 AND exp_x_2 < exp_y_2) THEN
+            InsertTerm(result, coef2, exp_y_1, exp_y_2)
+            poly2 <- poly2.next
+        ELSE
+            INT sum <- coef1 + coef2
+            IF sum != 0 THEN
+                InsertTerm(result, sum, exp_x_1, exp_x_2)
+            END IF
+            poly1 <- poly1.next
+            poly2 <- poly2.next
+        END IF
+    END WHILE
+    RETURN result
+END OF FUNCTION
+
+START OF FUNCTION DisplayPolynomial(poly)
+    WHILE poly != NULL
+        PRINT poly.coefficient, "x^", poly.exp_x, "y^", poly.exp_y
+        poly <- poly.next
+        IF poly != NULL THEN
+            PRINT " + "
+        END IF
+    END WHILE
+    PRINT "\n"
+END OF FUNCTION
+
+START OF FUNCTION FreeList(head)
+    NODE temp
+    WHILE head != NULL
+        temp <- head
+        head <- head.next
+        FREE(temp)
+END OF FUNCTION
+
+START OF FUNCTION NODE Main()
+    NODE poly1 <- NULL
+    NODE poly2 <- NULL
+    NODE result <- NULL
+
+    INT terms1, terms2
+    INT coef, exp_x, exp_y
+
+    PRINT "Enter the number of terms for Polynomial 1: "
+    INPUT terms1
+
+    FOR i <- 1 TO terms1
+        PRINT "Enter the term ", i, " (coefficient exp_x exp_y):"
+        INPUT coef, exp_x, exp_y
+        InsertTerm(poly1, coef, exp_x, exp_y)
+    END FOR
+
+    PRINT "Enter the number of terms for Polynomial 2: "
+    INPUT terms2
+
+    FOR i <- 1 TO terms2
+        PRINT "Enter the term ", i, " (coefficient exp_x exp_y):"
+        INPUT coef, exp_x, exp_y
+        InsertTerm(poly2, coef, exp_x, exp_y)
+    END FOR
+
+    PRINT "\nPolynomial 1: "
+    DisplayPolynomial(poly1)
+
+    PRINT "Polynomial 2: "
+    DisplayPolynomial(poly2)
+
+    result <- AddPolynomials(poly1, poly2)
+
+    PRINT "\nResultant Polynomial: "
+    DisplayPolynomial(result)
+
+    FreeList(poly1)
+    FreeList(poly2)
+    FreeList(result)
+END OF FUNCTION

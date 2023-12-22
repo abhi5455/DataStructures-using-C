@@ -1,0 +1,22 @@
+1 - EnqueFront
+2 - EnqueBack
+3 - DequeFront
+4 - DequeBack
+5 - Display
+6 - Exit
+Enter the choice : 1
+Enter the Element to be added in front : 20
+Enter the choice : 1
+Enter the Element to be added in front : 40
+Enter the choice : 1
+Enter the Element to be added in front : 50
+Enter the choice : 2
+Enter the Element to be added in back : 60
+Enter the choice : 2
+Enter the Element to be added in back : 100
+Enter the choice : 3
+Dequed element : 50
+Enter the choice : 5
+Elements of the Queue are: 40  20  60  100
+Enter the choice : 6
+Exiting!!

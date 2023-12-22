@@ -1,0 +1,6 @@
+Postfix exp: ab+cd*-
+Enter a: 1
+Enter b: 2
+Enter c: 8
+Enter d: 4
+result: -29.000000

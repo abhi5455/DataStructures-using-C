@@ -1,0 +1,27 @@
+START OF FUNCTION main():
+    VARIABLE i, key, count
+    ARRAY arr[20]
+
+    PRINT "Enter the no of Elements: "
+    INPUT count
+
+    PRINT "Enter the " + count + " elements: "
+    FOR i FROM 0 TO count - 1 DO
+        INPUT arr[i]
+    END FOR
+
+    PRINT "Enter the element to be searched : "
+    INPUT key
+
+    FOR i FROM 0 TO count - 1 DO
+        IF arr[i] EQUALS key THEN
+            BREAK
+        END IF
+    END FOR
+
+    IF i EQUALS count THEN
+        PRINT "The Element is not Found"
+    ELSE
+        PRINT "The Element " + key + " is Found at position " + (i + 1)
+    END IF
+END OF FUNCTION

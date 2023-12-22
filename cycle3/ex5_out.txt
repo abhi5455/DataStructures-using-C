@@ -1,0 +1,16 @@
+1 - Enque
+2 - Deque
+3 - Display
+4 - Exit
+Enter the choice : 1
+Enter Element: 10
+Enter the choice : 1
+Enter Element: 20
+Enter the choice : 1
+Enter Element: 30
+Enter the choice : 1
+Enter Element: 50
+Enter the choice : 2
+Dequed element : 10
+Enter the choice : 3
+Elements of the Queue are: 20 30 50

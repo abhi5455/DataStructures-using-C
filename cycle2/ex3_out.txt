@@ -1,0 +1,14 @@
+Enter the choice : 1
+Enter the Element: 20
+
+Enter the choice : 1
+Enter the Element: 30
+
+Enter the choice : 2
+Popped element is: 30
+
+Enter the choice : 3
+Elements of the Stack are: 10  20
+
+Enter the choice : 4
+Exiting

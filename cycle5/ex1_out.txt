@@ -1,0 +1,20 @@
+1. Display
+2. Insert at beginning
+3. Insert at end
+4. Insert at a specified position
+5. Delete from beginning
+6. Delete from end
+7. Delete from a specified position
+Choice:2
+Enter the element to be inserted: 20
+Choice:2
+Enter the element to be inserted: 20
+Choice:3
+Enter the element to be inserted: 6
+Choice:5
+The Element deleted is 20
+Choice:6
+The Element deleted is 6
+Choice:1
+Elements of the Linked list are:
+20

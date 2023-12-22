@@ -1,0 +1,4 @@
+Enter the no of elements: 6
+Enter the 6 elements: 2 4 5 6 7 9
+Enter the element to be searched : 7
+The element 7 is found at position 5

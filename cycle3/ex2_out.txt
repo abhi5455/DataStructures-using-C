@@ -1,0 +1,2 @@
+Enter infix Expression(in the form of variables): a+b*c-d
+Prefix: +a-*bcd

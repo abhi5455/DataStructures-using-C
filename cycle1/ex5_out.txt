@@ -1,0 +1,3 @@
+Enter the Number of elements: 5
+Enter the elements: 3 5 7 1 4
+The sorted elements are :  1  3  4  5  7

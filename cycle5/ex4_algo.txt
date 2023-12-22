@@ -1,0 +1,86 @@
+STRUCT Node
+    INT data
+    NODE link
+
+NODE front <- NULL
+NODE rear <- NULL
+
+START OF FUNCTION Enqueue(item)
+    NODE newnode <- ALLOCATE(sizeof(Node))
+
+    IF front == NULL AND rear == NULL THEN
+        front <- rear <- newnode
+        rear.data <- item
+        rear.link <- NULL
+    ELSE
+        rear.link <- newnode
+        newnode.data <- item
+        newnode.link <- NULL
+        rear <- newnode
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION Dequeue()
+    NODE ptr
+    INT n
+
+    IF front == NULL THEN
+        PRINT "Underflow"
+    ELSE
+        n <- front.data
+        ptr <- front.link
+        FREE(front)
+        front <- ptr
+        PRINT "Deleted element is:", n
+        RETURN
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION Display()
+    NODE ptr
+
+    IF front == NULL AND rear == NULL THEN
+        PRINT "Queue is Empty"
+        RETURN
+    END IF
+
+    PRINT "The queue is:"
+    ptr <- front
+    WHILE ptr.link != NULL
+        PRINT ptr.data
+        ptr <- ptr.link
+
+    PRINT ptr.data
+    RETURN
+END OF FUNCTION
+
+START OF FUNCTION Main()
+    INT choice <- 1
+    INT item
+
+    PRINT "Implementation of Queue using Linked List"
+    PRINT "1-Enqueue"
+    PRINT "2-Dequeue"
+    PRINT "3-Display"
+
+    REPEAT
+        PRINT "Enter your choice:"
+        INPUT choice
+
+        SWITCH choice
+            CASE 1:
+                PRINT "Enter the value to be inserted:"
+                INPUT item
+                Enqueue(item)
+                BREAK
+            CASE 2:
+                Dequeue()
+                BREAK
+            CASE 3:
+                Display()
+                BREAK
+            DEFAULT:
+                PRINT "Invalid choice"
+        END SWITCH
+    UNTIL choice > 3
+END OF FUNCTION

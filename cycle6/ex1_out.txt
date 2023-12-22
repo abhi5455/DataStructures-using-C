@@ -1,0 +1,32 @@
+Enter the root element : 10
+Does [10] has left child?(y/n): y
+Enter the element : 20
+Does [20] has left child?(y/n): y
+Enter the element : 30
+Does [30] has left child?(y/n): n
+Does [30] has right child?(y/n) : n
+Does [20] has right child?(y/n) : y
+Enter the element : 7
+Does [7] has left child?(y/n): n
+Does [7] has right child?(y/n) : n
+Does [10] has right child?(y/n) : y
+Enter the element : 8
+Does [8] has left child?(y/n): n
+Does [8] has right child?(y/n) : n
+
+1 - Inorder
+2 - Preorder
+3 - Postorder
+4 - Delete
+Choice: 1
+Inorder: 30 20 7 10 8
+Choice: 2
+Preorder: 10 20 30 7 8
+Choice: 3
+Postorder: 30 7 20 8 10
+Choice: 4
+Enter the element to be deleted: 30
+Choice: 1
+Inorder: 20 7 10 8
+Choice: 5
+Finished

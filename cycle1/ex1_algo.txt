@@ -1,0 +1,50 @@
+START OF FUNCTION main():
+    VARIABLE m, n, s
+    ARRAY A[30], B[30], C[60]
+    VARIABLE i <- 0, j <- 0, k <- 0
+
+    PRINT "Enter the no of Elements of 1st array: "
+    INPUT m
+
+    PRINT "Enter " + m + " Elements: "
+    FOR i FROM 0 TO m - 1:
+        INPUT A[i]
+
+    PRINT "Enter the no of Elements of 2nd array: "
+    INPUT n
+
+    PRINT "Enter " + n + " Elements: "
+    FOR i FROM 0 TO n - 1:
+        INPUT B[i]
+
+    s <- m + n
+
+    WHILE i < m AND j < n DO
+        IF A[i] < B[j] THEN
+            C[k] <- A[i]
+            k <- k + 1
+            i <- i + 1
+        ELSE
+            C[k] <- B[j]
+            k <- k + 1
+            j <- j + 1
+        END IF
+    END WHILE
+
+    WHILE i < m DO
+        C[k] <- A[i]
+        k <- k + 1
+        i <- i + 1
+    END WHILE
+
+    WHILE j < n DO
+        C[k] <- B[j]
+        k <- k + 1
+        j <- j + 1
+    END WHILE
+
+    PRINT "Merged list is: "
+    FOR i FROM 0 TO s - 1:
+        PRINT C[i] + " "
+    END FOR
+END OF FUNCTION

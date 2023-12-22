@@ -1,0 +1,70 @@
+CONSTANT SIZE <- 5
+CONSTANT INVALID <- -9999
+
+ARRAY stack[SIZE]
+VARIABLE top <- -1
+
+START OF FUNCTION push(item):
+    IF top EQUALS SIZE - 1 THEN
+        PRINT "Stack Overflow"
+    ELSE
+        top <- top + 1
+        stack[top] <- item
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION pop():
+    IF top EQUALS -1 THEN
+        PRINT "Stack Underflow"
+        RETURN INVALID
+    ELSE
+        VARIABLE poppedItem <- stack[top]
+        top <- top - 1
+        RETURN poppedItem
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION display():
+    VARIABLE i
+    IF top EQUALS -1 THEN
+        PRINT "Stack is empty"
+    ELSE
+        PRINT "Elements of the Stack are: "
+        FOR i FROM 0 TO top DO
+            PRINT stack[i] + "  "
+        END FOR
+        PRINT "\n"
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION main():
+    VARIABLE choice, item
+
+    PRINT "1 - Push\n2 - Pop\n3 - Display\n4 - Exit"
+
+    REPEAT
+        PRINT "Enter the choice : "
+        INPUT choice
+        SWITCH choice:
+            CASE 1:
+                PRINT "Enter the Element: "
+                INPUT item
+                CALL push(item)
+                BREAK
+            CASE 2:
+                item <- CALL pop()
+                IF item NOT EQUALS INVALID THEN
+                    PRINT "Popped element is: " + item
+                END IF
+                BREAK
+            CASE 3:
+                CALL display()
+                BREAK
+            CASE 4:
+                PRINT "Exiting"
+                BREAK
+            DEFAULT:
+                PRINT "Invalid CHOICE"
+        END SWITCH
+    UNTIL choice > 4
+END OF FUNCTION

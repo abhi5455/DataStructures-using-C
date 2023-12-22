@@ -1,0 +1,104 @@
+START OF FUNCTION prior(ch):
+    IF ch == '^' THEN
+        RETURN 5
+    ELSE IF ch == '*' OR ch == '/' THEN
+        RETURN 4
+    ELSE IF ch == '+' OR ch == '-' THEN
+        RETURN 3
+    ELSE IF ch == '(' THEN
+        RETURN 6
+    ELSE
+        RETURN -1
+END OF FUNCTION
+
+START OF FUNCTION prior_operator(start, end):
+    flag <- 0
+    pr <- 0
+    tpr <- 0
+    index <- -1
+    FOR i FROM start TO end DO
+        IF conv[i] == 0 THEN
+            tpr <- prior(expr[i])
+            IF tpr > pr THEN
+                pr <- tpr
+                index <- i
+            END IF
+        END IF
+    END FOR
+    IF expr[index] == '#' THEN
+        RETURN -1
+    END IF
+    IF pr == 6 THEN
+        flag <- 1
+    END IF
+    RETURN index
+END OF FUNCTION
+
+START OF FUNCTION swap(index):
+    IF expr[index] != '#' THEN
+        conv[index - 1] <- 1
+        conv[index] <- 1
+        i <- index
+        WHILE conv[++i] != 0 DO
+        END WHILE
+        IF i - index == 1 THEN
+            conv[i] <- 1
+            temp <- expr[i]
+            expr[i] <- expr[index]
+            expr[index] <- temp
+        ELSE
+            temp <- expr[index]
+            FOR j FROM index TO i DO
+                expr[j] <- expr[j + 1]
+            END FOR
+            expr[i - 1] <- temp
+        END IF
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION post(start, end):
+    br <- 0
+    op_index <- prior_operator(start, end)
+    IF op_index != -1 THEN
+        IF flag THEN
+            conv[op_index] <- 1
+            expr[op_index] <- '#'
+            FOR i FROM start TO end DO
+                IF expr[i] == '(' THEN
+                    br <- br + 1
+                END IF
+                IF expr[i] == ')' THEN
+                    IF br == 0 THEN
+                        conv[i] <- 1
+                        expr[i] <- '#'
+                        post(op_index + 1, i - 1)
+                        EXIT
+                    ELSE
+                        br <- br - 1
+                    END IF
+                END IF
+            END FOR
+        END IF
+        CALL swap(op_index)
+        CALL post(start, end)
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION main():
+    CHARACTER ARRAY expr[MAX], conv[MAX]
+    flag <- 0
+    PRINT "Enter an Infix Expression:  "
+    INPUT expr
+    len <- LENGTH(expr)
+    FOR i FROM 0 TO len DO
+        conv[i] <- 0
+    END FOR
+    CALL post(0, len - 1)
+    PRINT "Result : "
+    FOR i FROM 0 TO len DO
+        IF expr[i] != '#' THEN
+            PRINT expr[i]
+        END IF
+    END FOR
+    PRINT "\n"
+END OF FUNCTION

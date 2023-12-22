@@ -1,0 +1,56 @@
+CONSTANT SIZE <- 20
+CONSTANT INVALID <- '\0'
+
+ARRAY stack[SIZE]
+VARIABLE top <- -1
+
+START OF FUNCTION push(item):
+    IF top EQUALS SIZE - 1 THEN
+        PRINT "Stack Overflow"
+    ELSE
+        top <- top + 1
+        stack[top] <- item
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION pop():
+    IF top EQUALS -1 THEN
+        PRINT "Stack Underflow"
+        RETURN INVALID
+    ELSE
+        top <- top - 1
+        RETURN stack[top + 1]
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION main():
+    VARIABLE flag <- 0
+    VARIABLE i, j, len <- 0
+    ARRAY str[20], S[20]
+
+    PRINT "Enter the string: "
+    INPUT str
+
+    FOR i FROM 0 TO LENGTH OF str - 1 DO
+        len <- len + 1
+    END FOR
+
+    FOR i FROM 0 TO len / 2 - 1 DO
+        CALL push(str[i])
+    END FOR
+
+    i <- IF (len MOD 2 EQUALS 1) THEN (len/2)+1 ELSE len/2 END IF
+
+    FOR j FROM i TO len - 1 DO
+        IF str[j] NOT EQUALS CALL pop() THEN
+            flag <- 1
+            EXIT FOR
+        END IF
+    END FOR
+
+    IF NOT flag THEN
+        PRINT "The string " + str + " is a palindrome"
+    ELSE
+        PRINT "The string " + str + " is not a palindrome"
+    END IF
+END OF FUNCTION

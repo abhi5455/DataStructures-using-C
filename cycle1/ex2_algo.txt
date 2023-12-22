@@ -1,0 +1,43 @@
+START OF FUNCTION findLongestSubstring(str):
+    VARIABLE n <- 0
+    VARIABLE maxLength <- 0
+    VARIABLE start <- 0
+    VARIABLE longestStart <- 0
+    VARIABLE i
+
+    WHILE str[n] NOT EQUALS '\0' DO
+        n <- n + 1
+    END WHILE
+
+    FOR i FROM 0 TO n - 1 DO
+        VARIABLE currentLength
+        FOR j FROM start TO i - 1 DO
+            IF str[i] EQUALS str[j] THEN
+                start <- j + 1
+                BREAK
+            END IF
+        END FOR
+
+        currentLength <- i - start + 1
+
+        IF currentLength > maxLength THEN
+            maxLength <- currentLength
+            longestStart <- start
+        END IF
+    END FOR
+
+    PRINT "The longest substring with no repeating characters is: "
+    FOR i FROM longestStart TO longestStart + maxLength - 1 DO
+        PRINT str[i]
+    END FOR
+    PRINT "\n"
+END OF FUNCTION
+
+START OF FUNCTION main():
+    ARRAY str[100]
+
+    PRINT "Enter string: "
+    INPUT str
+
+    CALL findLongestSubstring(str)
+END OF FUNCTION

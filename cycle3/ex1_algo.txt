@@ -1,0 +1,168 @@
+START OF FUNCTION Push(s, top, item):
+    s[top + 1] <- item
+    top <- top + 1
+END OF FUNCTION
+
+START OF FUNCTION PushF(s, top, item):
+    s[top + 1] <- item
+    top <- top + 1
+END OF FUNCTION
+
+START OF FUNCTION CHARACTER Pop(s, top):
+    IF top = -1 THEN
+        RETURN '\0'
+    ELSE
+        top <- top - 1
+        RETURN s[top + 1]
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION FLOAT PopF(s, top):
+    IF top = -1 THEN
+        RETURN 0
+    ELSE
+        top <- top - 1
+        RETURN s[top + 1]
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION BOOLEAN isOperand(ch):
+    RETURN (ch >= 'a' AND ch <= 'z') OR (ch >= 'A' AND ch <= 'Z')
+END OF FUNCTION
+
+START OF FUNCTION BOOLEAN isOperator(ch):
+    RETURN (ch = '+' OR ch = '-' OR ch = '*' OR ch = '/' OR ch = '^')
+END OF FUNCTION
+
+START OF FUNCTION INTEGER ICP(ch):
+    SWITCH ch:
+        CASE '+', '-':
+            RETURN 1
+        CASE '*', '/':
+            RETURN 3
+        CASE '^':
+            RETURN 6
+        DEFAULT:
+            RETURN -1
+    END SWITCH
+
+START OF FUNCTION INTEGER ISP(ch):
+    SWITCH ch:
+        CASE '+', '-':
+            RETURN 2
+        CASE '*', '/':
+            RETURN 4
+        CASE '^':
+            RETURN 5
+        DEFAULT:
+            RETURN -1
+    END SWITCH
+END OF FUNCTION
+
+START OF FUNCTION INTEGER convertInfixToPostfix(infix, postfix):
+    CHARACTER ARRAY Stack[100]
+    CHARACTER curr
+    INTEGER top <- -1, len <- 0, i, j <- 0
+
+    FOR i FROM 1 TO LEN(infix) DO
+        len <- len + 1
+    END FOR
+
+    CALL Push(Stack, top, '(')
+    infix[len + 1] <- ')'
+    infix[len + 2] <- '\0'
+
+    FOR i FROM 1 TO LEN(infix) DO
+        curr <- infix[i]
+        IF curr = ' ' OR curr = '\t' THEN
+            CONTINUE
+        END IF
+
+        IF isOperand(curr) THEN
+            postfix[j] <- curr
+            j <- j + 1
+        ELSE IF curr = '(' THEN
+            CALL Push(Stack, top, curr)
+        ELSE IF isOperator(curr) THEN
+            WHILE top > -1 AND ICP(curr) <= ISP(Stack[top]) DO
+                CHARACTER item <- Pop(Stack, top)
+                postfix[j] <- item
+                j <- j + 1
+            END WHILE
+            CALL Push(Stack, top, curr)
+        ELSE IF curr = ')' THEN
+            WHILE top > -1 AND Stack[top] <> '(' DO
+                CHARACTER item <- Pop(Stack, top)
+                postfix[j] <- item
+                j <- j + 1
+            END WHILE
+            CALL Pop(Stack, top)
+        ELSE
+            RETURN 0
+        END IF
+    END FOR
+
+    postfix[j] <- '\0'
+    RETURN 1
+END OF FUNCTION
+
+START OF FUNCTION FLOAT evalExpr(opr, a, b):
+    SWITCH opr:
+        CASE '+':
+            RETURN a + b
+        CASE '-':
+            RETURN a - b
+        CASE '*':
+            RETURN a * b
+        CASE '/':
+            RETURN a / b
+        CASE '^':
+            RETURN POW(a, b)
+        DEFAULT:
+            RETURN 0
+    END SWITCH
+END OF FUNCTION
+
+START OF FUNCTION FLOAT evalPostfix(postfix):
+    CHARACTER curr
+    FLOAT ARRAY Stack[100]
+    INTEGER i, top <- -1
+    FLOAT ARRAY values[26][2] <- {{0, 0}}
+
+    FOR i FROM 1 TO LEN(postfix) DO
+        curr <- postfix[i]
+        IF isOperand(curr) THEN
+            INTEGER val <- getAlphaPos(curr)
+            IF values[val][2] = 0 THEN
+                PRINT "Enter " + curr + ": "
+                INPUT values[val][1]
+                values[val][2] <- 1
+            END IF
+            CALL PushF(Stack, top, values[val][1])
+        ELSE IF isOperator(curr) THEN
+            FLOAT b <- PopF(Stack, top)
+            FLOAT a <- PopF(Stack, top)
+            FLOAT c <- evalExpr(curr, a, b)
+            CALL PushF(Stack, top, c)
+        END IF
+    END FOR
+
+    RETURN Stack[0]
+END OF FUNCTION
+
+START OF FUNCTION main():
+    CHARACTER ARRAY Q[100], P[100]
+    INTEGER status
+
+    PRINT "Enter Expression(in the form of variables): "
+    INPUT Q
+
+    status <- convertInfixToPostfix(Q, P)
+
+    IF status THEN
+        PRINT "Postfix expression: " + P
+        PRINT "Result: " + evalPostfix(P)
+    ELSE
+        PRINT "Error in expression"
+    END IF
+END OF FUNCTION

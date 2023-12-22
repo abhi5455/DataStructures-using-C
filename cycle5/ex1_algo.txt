@@ -1,0 +1,152 @@
+STRUCT Node
+    INT data
+    NODE link
+
+START OF FUNCTION Display(head)
+    NODE temp <- head
+    IF head == NULL THEN
+        PRINT "There are no elements in the linked list"
+        RETURN
+    END IF
+    PRINT "Elements of the linked list are:"
+    WHILE temp != NULL
+        PRINT temp.data, " "
+        temp <- temp.link
+    END WHILE
+END OF FUNCTION
+
+START OF FUNCTION InsertBegin(head)
+    INT key
+    PRINT "Enter the element to be inserted:"
+    INPUT key
+    NODE temp <- ALLOCATE(sizeof(Node))
+    temp.link <- head
+    temp.data <- key
+    head <- temp
+    RETURN head
+END OF FUNCTION
+
+START OF FUNCTION InsertEnd(head)
+    INT key
+    PRINT "Enter the element to be inserted:"
+    INPUT key
+    NODE temp <- head
+    NODE temp1 <- ALLOCATE(sizeof(Node))
+    temp1.link <- NULL
+    temp1.data <- key
+    IF head == NULL THEN
+        head <- temp1
+        RETURN head
+    END IF
+    WHILE temp.link != NULL
+        temp <- temp.link
+    END WHILE
+    temp.link <- temp1
+    RETURN head
+END OF FUNCTION
+
+START OF FUNCTION Insert(head)
+    INT position, key
+    PRINT "Enter the element to be inserted:"
+    INPUT key
+    NODE temp <- head
+    NODE temp1 <- ALLOCATE(sizeof(Node))
+    temp1.data <- key
+    temp1.link <- NULL
+    IF head == NULL THEN
+        PRINT "Linked list is empty, inserting as the first element"
+        head <- temp1
+        RETURN head
+    END IF
+    PRINT "After which element do you want to insert the new element:"
+    INPUT position
+    WHILE temp.data != position
+        IF temp.link == NULL THEN
+            PRINT "The element ", position, " is not present in the linked list"
+            RETURN head
+        END IF
+        temp <- temp.link
+    END WHILE
+    temp1.link <- temp.link
+    temp.link <- temp1
+    RETURN head
+END OF FUNCTION
+
+START OF FUNCTION DeleteBegin(head)
+    IF head == NULL THEN
+        PRINT "There are no elements in the linked list"
+        RETURN NULL
+    END IF
+    PRINT "The element deleted is ", head.data
+    head <- head.link
+    RETURN head
+END OF FUNCTION
+
+START OF FUNCTION DeleteEnd(head)
+    INT key
+    IF head == NULL THEN
+        PRINT "There are no elements in the linked list"
+        RETURN head
+    END IF
+    NODE temp <- head
+    NODE temp1 <- head
+    IF temp.link == NULL THEN
+        head <- NULL
+        RETURN head
+    END IF
+    WHILE temp.link != NULL
+        temp1 <- temp
+        temp <- temp.link
+    END WHILE
+    PRINT "The element deleted is ", temp.data
+    temp1.link <- NULL
+    RETURN head
+END OF FUNCTION
+
+START OF FUNCTION Delete(head)
+    INT position
+    NODE temp <- head
+    NODE temp1 <- ALLOCATE(sizeof(Node))
+    temp1 <- head
+    IF head == NULL THEN
+        PRINT "Linked list is empty"
+        RETURN head
+    END IF
+    PRINT "Which element do you want to delete:"
+    INPUT position
+    IF head.data == position THEN
+        head <- head.link
+        RETURN head
+    END IF
+    WHILE temp.data != position
+        temp1 <- temp
+        temp <- temp.link
+    END WHILE
+    temp1.link <- temp.link
+    RETURN head
+END OF FUNCTION
+
+START OF FUNCTION Main()
+    INT choice
+    NODE head <- NULL
+    PRINT "1. Display"
+    PRINT "2. Insert at beginning"
+    PRINT "3. Insert at end"
+    PRINT "4. Insert at a specified position"
+    PRINT "5. Delete from beginning"
+    PRINT "6. Delete from end"
+    PRINT "7. Delete from a specified position"
+    REPEAT
+        PRINT "Enter your choice (1/2/3/4/5/6/7):"
+        INPUT choice
+        SWITCH choice
+            CASE 1: Display(head)
+            CASE 2: head <- InsertBegin(head)
+            CASE 3: head <- InsertEnd(head)
+            CASE 4: head <- Insert(head)
+            CASE 5: head <- DeleteBegin(head)
+            CASE 6: head <- DeleteEnd(head)
+            CASE 7: head <- Delete(head)
+        END SWITCH
+    UNTIL choice > 7
+END OF FUNCTION

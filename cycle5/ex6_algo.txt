@@ -1,0 +1,95 @@
+STRUCT Node
+    INT coeff
+    INT ex
+    NODE link
+
+START OF FUNCTION NODE insert(NODE head, INT coeff, INT ex)
+    NODE temp
+    NODE newnode <- ALLOCATE(sizeof(Node))
+    newnode.coeff <- coeff
+    newnode.ex <- ex
+    newnode.link <- NULL
+
+    IF head == NULL OR ex > head.ex THEN
+        newnode.link <- head
+        head <- newnode
+    ELSE
+        temp <- head
+        WHILE temp.link != NULL AND temp.link.ex >= ex
+            temp <- temp.link
+
+        newnode.link <- temp.link
+        temp.link <- newnode
+
+    RETURN head
+END OF FUNCTION
+
+START OF FUNCTION NODE create(NODE head)
+    INT n, i, coeff, ex
+    PRINT "Enter the number of terms:"
+    INPUT n
+
+    FOR i <- 0 TO n-1
+        PRINT "Coefficient of term", i+1, ":"
+        INPUT coeff
+        PRINT "Exponent of term", i+1, ":"
+        INPUT ex
+        head <- insert(head, coeff, ex)
+
+    RETURN head
+END OF FUNCTION
+
+START OF FUNCTION VOID print(NODE head)
+    IF head == NULL
+        PRINT "No polynomial"
+    ELSE
+        NODE ptr <- head
+        WHILE ptr != NULL
+            PRINT "(", ptr.coeff, "x^", ptr.ex, ")"
+            ptr <- ptr.link
+            IF ptr != NULL
+                PRINT " + "
+            ELSE
+                PRINT NEWLINE
+END OF FUNCTION
+
+START OF FUNCTION VOID add(NODE head1, NODE head2)
+    NODE ptr1 <- head1
+    NODE ptr2 <- head2
+    NODE head3 <- NULL
+
+    WHILE ptr1 != NULL AND ptr2 != NULL
+        IF ptr1.ex == ptr2.ex
+            head3 <- insert(head3, ptr1.coeff + ptr2.coeff, ptr1.ex)
+            ptr1 <- ptr1.link
+            ptr2 <- ptr2.link
+        ELSE IF ptr1.ex > ptr2.ex
+            head3 <- insert(head3, ptr1.coeff, ptr1.ex)
+            ptr1 <- ptr1.link
+        ELSE IF ptr1.ex < ptr2.ex
+            head3 <- insert(head3, ptr2.coeff, ptr2.ex)
+            ptr2 <- ptr2.link
+
+    WHILE ptr1 != NULL
+        head3 <- insert(head3, ptr1.coeff, ptr1.ex)
+        ptr1 <- ptr1.link
+
+    WHILE ptr2 != NULL
+        head3 <- insert(head3, ptr2.coeff, ptr2.ex)
+        ptr2 <- ptr2.link
+
+    PRINT "Added polynomial is"
+    print(head3)
+END OF FUNCTION
+
+START OF FUNCTION Main()
+    NODE head1 <- NULL
+    NODE head2 <- NULL
+
+    PRINT "Enter the first polynomial"
+    head1 <- create(head1)
+    PRINT "Enter second polynomial"
+    head2 <- create(head2)
+
+    add(head1, head2)
+END OF FUNCTION

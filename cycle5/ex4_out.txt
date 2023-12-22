@@ -1,0 +1,14 @@
+Implementation of Queue using Linked List
+1-Enqueue
+2-Dequeue
+3-Display
+Enter your choice: 1
+Enter the value to be inserted: 2
+Enter your choice: 1
+Enter the value to be inserted: 7
+Enter your choice: 1
+Enter the value to be inserted: 10
+Enter your choice: 2
+Deleted element is 2
+Enter your choice: 3
+The Queue is: 7 10

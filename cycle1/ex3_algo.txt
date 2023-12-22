@@ -1,0 +1,21 @@
+START OF FUNCTION main():
+    ARRAY arr[20]
+    VARIABLE n
+    POINTER ptr
+    VARIABLE i
+
+    PRINT "Enter the no of Elements: "
+    INPUT n
+
+    PRINT "Enter " + n + " elements :"
+    FOR i FROM 0 TO n - 1:
+        INPUT arr[i]
+
+    ptr <- ADDRESS OF arr[0]
+
+    FOR i FROM 1 TO n - 1:
+        IF *ptr > *(arr+i) THEN
+            ptr <- ADDRESS OF *(arr+i)
+
+    PRINT "Smallest number is " + *ptr
+END OF FUNCTION

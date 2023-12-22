@@ -1,0 +1,4 @@
+Enter the no of elements: 5
+Enter the 5 elements: 2 4 8 62 4
+Enter the element to be searched: 62
+The Element 62 is Found at position 4

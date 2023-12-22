@@ -1,0 +1,179 @@
+STRUCT Node
+	INT data
+	NODE left, right
+
+NODE getnode()
+	NODE temp <- ALLOCATE(sizeof(Node))
+	temp.left <- NULL
+	temp.right <- NULL
+	RETURN temp
+
+START OF FUNCTION buildtree(ptr, data)
+	INT Data
+	IF ptr != NULL THEN
+		ptr.data <- data
+		CHAR ch
+		PRINT "Does [", data, "] has left child? (y/n): "
+		INPUT ch
+		IF ch == 'y' THEN
+			PRINT "Enter the element: "
+			INPUT Data
+			NODE temp <- getnode()
+			ptr.left <- temp
+			buildtree(temp, Data)
+		ELSE
+			ptr.left <- NULL
+		END IF
+
+		PRINT "Does [", data, "] has right child? (y/n): "
+		INPUT ch
+		IF ch == 'y' THEN
+			PRINT "Enter the element: "
+			INPUT Data
+			NODE temp <- getnode()
+			ptr.right <- temp
+			buildtree(temp, Data)
+		ELSE
+			ptr.right <- NULL
+		END IF
+	END IF
+END OF FUNCTION
+
+START OF FUNCTION inorder(ptr)
+	IF ptr != NULL THEN
+		inorder(ptr.left)
+		PRINT ptr.data, " "
+		inorder(ptr.right)
+	END IF
+END OF FUNCTION
+
+START OF FUNCTION preorder(ptr)
+	IF ptr != NULL THEN
+		PRINT ptr.data, " "
+		preorder(ptr.left)
+		preorder(ptr.right)
+	END IF
+END OF FUNCTION
+
+START OF FUNCTION postorder(ptr)
+	IF ptr != NULL THEN
+		postorder(ptr.left)
+		postorder(ptr.right)
+		PRINT ptr.data, " "
+	END IF
+END OF FUNCTION
+
+START OF FUNCTION inorderparent(ptr, item)
+	IF ptr != NULL THEN
+		IF ptr.left != NULL AND ptr.left.data == item THEN
+			gparent <- ptr
+			gchild <- ptr.left
+			RETURN
+		ELSE IF ptr.right != NULL AND ptr.right.data == item THEN
+			gparent <- ptr
+			gchild <- ptr.right
+			RETURN
+		END IF
+
+		IF ptr.data == item THEN
+			gchild <- ptr
+			gparent <- NULL
+		END IF
+
+		inorderparent(ptr.left, item)
+		inorderparent(ptr.right, item)
+	END IF
+END OF FUNCTION
+
+START OF FUNCTION successor(ptr)
+	gparent <- ptr
+	IF ptr.right != NULL THEN
+		ptr <- ptr.right
+		WHILE ptr.left != NULL
+			gparent <- ptr
+			ptr <- ptr.left
+		END WHILE
+	END IF
+	gchild <- ptr
+END OF FUNCTION
+
+START OF FUNCTION deletenode()
+	NODE child <- gchild
+	NODE parent <- gparent
+	IF parent == NULL THEN
+		IF child != NULL THEN
+			successor(child)
+			child.data <- gchild.data
+			deletenode()
+		END IF
+	ELSE IF child.left == NULL AND child.right == NULL THEN
+		IF parent.left == child THEN
+			FREE(child)
+			parent.left <- NULL
+		ELSE
+			FREE(child)
+			parent.right <- NULL
+		END IF
+	ELSE IF child.right == NULL THEN
+		IF parent.left == child THEN
+			parent.left <- child.left
+			FREE(child)
+		ELSE
+			parent.right <- child.left
+			FREE(child)
+		END IF
+	ELSE IF child.left == NULL THEN
+		IF parent.left == child THEN
+			parent.left <- child.right
+			FREE(child)
+		ELSE
+			parent.right <- child.right
+			FREE(child)
+		END IF
+	ELSE
+		successor(child)
+		child.data <- gchild.data
+		deletenode()
+	END IF
+END OF FUNCTION
+
+START OF FUNCTION main()
+	NODE root <- getnode()
+	INT rootelement, a
+
+	PRINT "Enter the root element: "
+	INPUT rootelement
+	buildtree(root, rootelement)
+
+	PRINT "1 - Inorder\n2 - Preorder\n3 - Postorder\n4 - Delete\n"
+	WHILE TRUE
+		INT flag
+		PRINT "Choice: "
+		INPUT flag
+		SWITCH flag
+			CASE 1:
+				PRINT "\nInorder: "
+				inorder(root)
+				PRINT "\n"
+				BREAK
+			CASE 2:
+				PRINT "\nPreorder: "
+				preorder(root)
+				PRINT "\n"
+				BREAK
+			CASE 3:
+				PRINT "\nPostorder: "
+				postorder(root)
+				PRINT "\n"
+				BREAK
+			CASE 4:
+				PRINT "\nEnter the element to be deleted: "
+				INPUT a
+				inorderparent(root, a)
+				deletenode()
+				BREAK
+			DEFAULT:
+				RETURN 0
+		END SWITCH
+	END WHILE
+END OF FUNCTION

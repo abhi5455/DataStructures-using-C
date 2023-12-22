@@ -1,0 +1,75 @@
+START OF FUNCTION readpoly(poly, n):
+    FOR i FROM n DOWNTO 0 DO
+        PRINT "Enter the coefficient of x^" + i + ": "
+        INPUT poly[i]
+END OF FUNCTION
+
+START OF FUNCTION printpoly(poly, n):
+    FOR i FROM 0 TO n DO
+        PRINT poly[i] + " x^" + (n - i)
+        IF i < n THEN
+            PRINT " + "
+        END IF
+    END FOR
+    PRINT "\n"
+END OF FUNCTION
+
+START OF FUNCTION add(poly1, n, poly2, m, poly3, x):
+    VARIABLE i <- n
+    VARIABLE j <- m
+
+    WHILE i >= 0 AND j >= 0 DO
+        IF i EQUALS j THEN
+            poly3[x] <- poly1[i] + poly2[j]
+            x <- x + 1
+            i <- i - 1
+            j <- j - 1
+        ELSE IF i > j THEN
+            poly3[x] <- poly1[i]
+            x <- x + 1
+            i <- i - 1
+        ELSE
+            poly3[x] <- poly2[j]
+            x <- x + 1
+            j <- j - 1
+        END IF
+    END WHILE
+
+    IF i > 0 THEN
+        poly3[x] <- poly1[i]
+        x <- x + 1
+    END IF
+
+    IF j > 0 THEN
+        poly3[x] <- poly2[j]
+        x <- x + 1
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION main():
+    VARIABLE n, m
+    PRINT "Enter the Degree of the 1st polynomial: "
+    INPUT n
+
+    ARRAY poly1[n + 1]
+    CALL readpoly(poly1, n)
+
+    PRINT "Enter the Degree of the 2nd polynomial: "
+    INPUT m
+
+    ARRAY poly2[m + 1]
+    CALL readpoly(poly2, m)
+
+    VARIABLE x <- 0
+    ARRAY poly3[m + n]
+    CALL add(poly1, n, poly2, m, poly3, x)
+
+    PRINT "1st Polynomial is"
+    CALL printpoly(poly1, n)
+
+    PRINT "2nd Polynomial is"
+    CALL printpoly(poly2, m)
+
+    PRINT "The sum of 2 polynomials is"
+    CALL printpoly(poly3, x)
+END OF FUNCTION

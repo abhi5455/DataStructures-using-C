@@ -1,0 +1,2 @@
+Enter string: aaabbbccccddddddd
+The longest substring with no repeating characters is: ab

@@ -1,0 +1,38 @@
+1-Insert at beginning
+2-Delete based on number
+3-Search based on num/name
+4-Sort based on number
+5-Display
+Enter your choice: 1
+Enter number,name and totalmark: 1 Harry 4445
+Enter your choice: 1
+Enter number,name and totalmark: 2 Dave 3534
+Enter your choice: 1
+Enter number,name and totalmark: 3 Chris 5842
+Enter your choice: 3
+Enter the name to be searched: Dave
+Found
+Number:2
+Name:Dave
+Mark:3534
+Enter your choice: 4
+Sorted successfully
+Number:2
+Name:Dave
+Mark:3534
+Number:3
+Name:Chris
+Mark:5842
+Number:1
+Name:Harry
+Mark:4445
+Enter your choice: 5
+Number:2
+Name:Dave
+Mark:3534
+Number:3
+Name:Chris
+Mark:5842
+Number:1
+Name:Harry
+Mark:4445

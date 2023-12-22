@@ -1,0 +1,39 @@
+START OF FUNCTION main():
+    VARIABLE i, key, mid, top, bot, count, flag
+    ARRAY arr[20]
+
+    PRINT "Enter the no of Elements: "
+    INPUT count
+
+    PRINT "Enter the " + count + " elements: "
+    FOR i FROM 0 TO count - 1 DO
+        INPUT arr[i]
+    END FOR
+
+    PRINT "Enter the element to be searched : "
+    INPUT key
+
+    top <- 0
+    bot <- count - 1
+    flag <- 0
+
+    WHILE top <= bot DO
+        mid <- (top + bot) / 2
+        IF arr[mid] EQUALS key THEN
+            flag <- 1
+            EXIT WHILE
+        END IF
+
+        IF arr[mid] < key THEN
+            top <- mid + 1
+        ELSE
+            bot <- mid - 1
+        END IF
+    END WHILE
+
+    IF flag THEN
+        PRINT "The element " + key + " is found at position " + (mid + 1)
+    ELSE
+        PRINT "The element not found"
+    END IF
+END OF FUNCTION

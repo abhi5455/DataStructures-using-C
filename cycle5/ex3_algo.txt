@@ -1,0 +1,84 @@
+STRUCT Node
+    INT data
+    NODE link
+
+NODE top <- NULL
+
+START OF FUNCTION Push(item)
+    NODE newnode <- ALLOCATE(sizeof(Node))
+
+    IF top == NULL THEN
+        top <- newnode
+        top.data <- item
+        top.link <- NULL
+    ELSE
+        newnode.data <- item
+        newnode.link <- top
+        top <- newnode
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION Pop()
+    NODE ptr
+    INT n
+
+    IF top == NULL THEN
+        PRINT "Stack is empty"
+        RETURN
+    END IF
+
+    n <- top.data
+    ptr <- top.link
+    FREE(top)
+    top <- ptr
+    PRINT "Removed Element:", n
+    RETURN
+END OF FUNCTION
+
+START OF FUNCTION Display()
+    NODE ptr
+
+    IF top == NULL THEN
+        PRINT "Stack is empty"
+        RETURN
+    END IF
+
+    PRINT "Elements of stack are:"
+    ptr <- top
+    WHILE ptr.link != NULL
+        PRINT ptr.data, " "
+        ptr <- ptr.link
+
+    PRINT ptr.data
+    RETURN
+END OF FUNCTION
+
+START OF FUNCTION Main()
+    INT choice <- 1
+    INT num
+
+    PRINT "1-PUSH"
+    PRINT "2-POP"
+    PRINT "3-DISPLAY"
+
+    REPEAT
+        PRINT "Enter your choice:"
+        INPUT choice
+
+        SWITCH choice
+            CASE 1:
+                PRINT "Enter the value to be pushed:"
+                INPUT num
+                Push(num)
+                BREAK
+            CASE 2:
+                Pop()
+                BREAK
+            CASE 3:
+                Display()
+                BREAK
+            DEFAULT:
+                PRINT "Invalid choice"
+        END SWITCH
+    UNTIL choice > 3
+END OF FUNCTION

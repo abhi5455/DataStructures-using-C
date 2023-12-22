@@ -1,0 +1,62 @@
+STRUCT Node
+    CHAR data
+    NODE rlink
+    NODE llink
+
+START OF FUNCTION InsertEnd(head, data)
+    NODE newNode <- ALLOCATE(sizeof(Node))
+    newNode.data <- data
+    newNode.rlink <- NULL
+
+    IF head == NULL THEN
+        newNode.llink <- NULL
+        head <- newNode
+        RETURN
+    END IF
+
+    NODE ptr <- head
+    WHILE ptr.rlink != NULL
+        ptr <- ptr.rlink
+
+    ptr.rlink <- newNode
+    newNode.llink <- ptr
+END OF FUNCTION
+
+START OF FUNCTION BOOLEAN IsPalindrome(head)
+    NODE start <- head
+    NODE end <- head
+
+    WHILE end.rlink != NULL
+        end <- end.rlink
+
+    WHILE start != end
+        IF start.data != end.data THEN
+            RETURN FALSE
+        END IF
+
+        start <- start.rlink
+        end <- end.llink
+
+        IF start == end THEN
+            BREAK
+        END IF
+    END WHILE
+
+    RETURN TRUE
+END OF FUNCTION
+
+START OF FUNCTION Main()
+    NODE head <- NULL
+    CHAR str[100]
+
+    PRINT "Enter a string:"
+    INPUT str
+
+    FOR i <- 0 TO LENGTH(str) - 1
+        InsertEnd(head, str[i])
+
+    IF IsPalindrome(head) THEN
+        PRINT "The string is a palindrome."
+    ELSE
+        PRINT "The string is not a palindrome."
+END OF FUNCTION

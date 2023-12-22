@@ -1,0 +1,7 @@
+Enter string 1: Hello
+Enter string 2: World
+Length of string 1 = 5
+Length of string 2 = 5
+Copied string 1 is: Hello
+Comparison of str1 and str2 is -1
+Concated str1 and str2 is HelloWorld

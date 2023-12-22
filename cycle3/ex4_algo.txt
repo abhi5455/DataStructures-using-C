@@ -1,0 +1,74 @@
+CONSTANT SIZE <- 5
+CONSTANT INVALID <- -99999
+
+ARRAY Q[SIZE]
+VARIABLE f <- -1
+VARIABLE r <- -1
+
+START OF FUNCTION enque(item):
+    IF r EQUALS SIZE - 1 THEN
+        PRINT "Queue is full"
+    ELSE
+        IF f EQUALS -1 THEN
+            f <- 0
+        END IF
+        r <- r + 1
+        Q[r] <- item
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION deque():
+    IF r EQUALS -1 THEN
+        PRINT "Queue is empty"
+    ELSE
+        VARIABLE item <- Q[f]
+        f <- f + 1
+        IF f > r THEN
+            f <- r <- -1
+        END IF
+        RETURN item
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION display():
+    IF r NOT EQUAL TO -1 THEN
+        VARIABLE i
+        PRINT "\n-->"
+        FOR i FROM f TO r DO
+            PRINT "  " + Q[i] + "  "
+        END FOR
+        PRINT "\n"
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION main():
+    VARIABLE choice, item
+
+    PRINT "1 - Enque\n2 - Deque\n3 - Display\n4 - Exit"
+
+    REPEAT
+        PRINT "Enter the choice : "
+        INPUT choice
+        SWITCH choice:
+            CASE 1:
+                PRINT "Enter the Element to be added: "
+                INPUT item
+                CALL enque(item)
+                BREAK
+            CASE 2:
+                item <- CALL deque()
+                IF item NOT EQUALS INVALID THEN
+                    PRINT "Dequeued element is " + item
+                END IF
+                BREAK
+            CASE 3:
+                CALL display()
+                BREAK
+            CASE 4:
+                PRINT "Exiting"
+                BREAK
+            DEFAULT:
+                PRINT "INVALID CHOICE"
+        END SWITCH
+    UNTIL choice > 4
+END OF FUNCTION

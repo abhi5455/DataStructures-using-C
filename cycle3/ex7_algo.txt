@@ -1,0 +1,150 @@
+CONSTANT SIZE <- 5
+
+ARRAY DQ[SIZE]
+VARIABLE f <- -1
+VARIABLE r <- -1
+
+START OF FUNCTION isFull():
+    IF (r + 1) MOD SIZE EQUALS f THEN
+        RETURN 1
+    ELSE
+        RETURN 0
+    END IF
+
+START OF FUNCTION isEmpty():
+    IF f EQUALS -1 THEN
+        RETURN 1
+    ELSE
+        RETURN 0
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION enqueFront(key):
+    IF isFull() THEN
+        PRINT "Overflow: Dequeue is full"
+        RETURN
+    END IF
+
+    IF f EQUALS -1 THEN
+        r <- f <- 0
+    ELSE
+        f <- (f - 1 + SIZE) MOD SIZE
+    END IF
+
+    DQ[f] <- key
+END OF FUNCTION
+
+START OF FUNCTION enqueBack(key):
+    IF isFull() THEN
+        PRINT "Overflow: Dequeue is full"
+        RETURN
+    END IF
+
+    IF f EQUALS -1 THEN
+        f <- r <- 0
+    ELSE
+        r <- (r + 1) MOD SIZE
+    END IF
+
+    DQ[r] <- key
+END OF FUNCTION
+
+START OF FUNCTION dequeFront():
+    IF isEmpty() THEN
+        PRINT "Underflow: Dequeue is empty"
+        RETURN 0
+    END IF
+
+    VARIABLE frontValue <- DQ[f]
+
+    IF f EQUALS r THEN
+        f <- r <- -1
+    ELSE
+        f <- (f + 1) MOD SIZE
+    END IF
+
+    RETURN frontValue
+END OF FUNCTION
+
+START OF FUNCTION dequeBack():
+    IF isEmpty() THEN
+        PRINT "Underflow: Dequeue is empty"
+        RETURN 0
+    END IF
+
+    VARIABLE rearValue <- DQ[r]
+
+    IF f EQUALS r THEN
+        f <- r <- -1
+    ELSE
+        r <- (r - 1 + SIZE) MOD SIZE
+    END IF
+
+    RETURN rearValue
+END OF FUNCTION
+
+START OF FUNCTION display():
+    IF r EQUALS -1 THEN
+        PRINT "Dequeue is Empty"
+        RETURN
+    END IF
+
+    PRINT "Elements of the Dequeue are: "
+    VARIABLE i
+
+    IF f <= r THEN
+        FOR i FROM f TO r DO
+            PRINT DQ[i] + "  "
+        END FOR
+    ELSE
+        FOR i FROM f TO SIZE - 1 DO
+            PRINT DQ[i] + "  "
+        END FOR
+        FOR i FROM 0 TO r DO
+            PRINT DQ[i] + "  "
+        END FOR
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION main():
+    VARIABLE choice, in, out
+
+    PRINT "1 - EnqueFront\n2 - EnqueBack\n3 - DequeFront\n4 - DequeBack\n5 - Display\n6 - Exit"
+
+    REPEAT
+        PRINT "Enter the choice : "
+        INPUT choice
+        SWITCH choice:
+            CASE 1:
+                PRINT "Enter the Element to be added in front : "
+                INPUT in
+                CALL enqueFront(in)
+                BREAK
+            CASE 2:
+                PRINT "Enter the Element to be added in back : "
+                INPUT in
+                CALL enqueBack(in)
+                BREAK
+            CASE 3:
+                out <- CALL dequeFront()
+                IF out THEN
+                    PRINT "Dequeued element : " + out
+                END IF
+                BREAK
+            CASE 4:
+                out <- CALL dequeBack()
+                IF out THEN
+                    PRINT "Dequeued element : " + out
+                END IF
+                BREAK
+            CASE 5:
+                CALL display()
+                BREAK
+            CASE 6:
+                PRINT "Exiting!!"
+                BREAK
+            DEFAULT:
+                PRINT "Invalid input"
+        END SWITCH
+    UNTIL choice > 6
+END OF FUNCTION

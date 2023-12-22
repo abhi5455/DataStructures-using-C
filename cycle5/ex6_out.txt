@@ -1,0 +1,16 @@
+Enter the first polynomial
+Enter the number of terms: 3
+Coefficient of term 1: 5
+Exponent of term 1: 2
+Coefficient of term 2: 3
+Exponent of term 2: 1
+Coefficient of term 3: 5
+Exponent of term 3: 0
+Enter second polynomial
+Enter the number of terms: 2
+Coefficient of term 1: 32
+Exponent of term 1: 2
+Coefficient of term 2: 4
+Exponent of term 2: 1
+Added polynomial is
+(37x^2) + (7x^1) + (5x^0)

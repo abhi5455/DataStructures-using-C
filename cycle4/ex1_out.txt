@@ -1,0 +1,15 @@
+Enter the Degree of the 1st polynomial: 3
+Enter the coefficient of x^3: 20
+Enter the coefficient of x^2: 3
+Enter the coefficient of x^1: 2
+Enter the coefficient of x^0: 5
+Enter the Degree of the 2nd polynomial 2
+Enter the coefficient of x^2: 1
+Enter the coefficient of x^1: 3
+Enter the coefficient of x^0: 5
+1st Polynomial is
+20.00 x^3 +3.00 x^2 +2.00 x^1 +5.00 x^0
+2nd Polynomial is
+1.00 x^2 +3.00 x^1 +5.00 x^0
+The sum of 2 polynomials is
+20.00 x^4 +4.00 x^3 +5.00 x^2 +10.00 x^1 +0.00 x^0

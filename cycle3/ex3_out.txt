@@ -1,0 +1,2 @@
+Enter an Infix Expression:  a+b*c-d
+Result : abc*+d-

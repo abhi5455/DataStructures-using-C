@@ -1,0 +1,34 @@
+Enter the row and columns of 1st matrix : 3 3
+Enter the 9 elements :
+1 3 0
+0 6 1
+0 0 5
+Enter the row and columns of 2nd matrix: 3 3
+Enter the 9 elements :
+8 0 1
+0 0 4
+1 0 0
+Sparse matrix
+3  3  5
+0  0  1
+1  0  3
+1  1  6
+2  1  1
+2  2  5
+
+Sparse matrix
+3  3  4
+0  0  8
+0  2  1
+2  0  1
+2  1  4
+
+Added Sparse matrix
+3  3  7
+0  0  9
+0  1  3
+0  2  1
+1  1  6
+1  2  5
+2  0  1
+2  2  5

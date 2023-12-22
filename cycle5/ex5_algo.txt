@@ -1,0 +1,89 @@
+STRUCT Queue
+    INT Item[20]
+    INT front
+    INT rear
+
+STRUCT Stack
+    INT Item[20]
+    INT top
+
+START OF FUNCTION Enqueue(item)
+    IF Q.rear == 20-1 THEN
+        PRINT "Queue Full"
+        RETURN
+    END IF
+    IF Q.front == -1 THEN
+        Q.front <- 0
+    END IF
+    Q.rear <- Q.rear + 1
+    Q.Item[Q.rear] <- item
+END OF FUNCTION
+
+START OF FUNCTION Dequeue()
+    IF Q.rear == -1 OR Q.front > Q.rear THEN
+        PRINT "Queue Empty"
+        RETURN
+    ELSE
+        PRINT "Item dequeued is ", Q.Item[Q.front]
+        Q.front <- Q.front + 1
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION Display()
+    IF Q.rear == -1 OR Q.front > Q.rear THEN
+        PRINT "Queue Empty"
+        RETURN
+    END IF
+    PRINT "Elements of the queue are"
+    FOR i <- Q.front TO Q.rear
+        PRINT Q.Item[i], " "
+    END FOR
+    PRINT "\n"
+END OF FUNCTION
+
+START OF FUNCTION Push(item)
+    S.top <- S.top + 1
+    S.Item[S.top] <- item
+END OF FUNCTION
+
+START OF FUNCTION Pop()
+    RETURN S.Item[S.top--]
+END OF FUNCTION
+
+START OF FUNCTION Reverse()
+    FOR i <- Q.front TO Q.rear
+        Push(Q.Item[i])
+    END FOR
+    FOR i <- Q.front TO Q.rear
+        Q.Item[i] <- Pop()
+    END FOR
+    PRINT "Queue after reversing is"
+    Display()
+END OF FUNCTION
+
+START OF FUNCTION Main()
+    INT ch <- 1
+    INT item
+    Q <- MALLOC(SIZEOF(Queue))
+    S <- MALLOC(SIZEOF(Stack))
+    Q.front <- -1
+    Q.rear <- -1
+    S.top <- -1
+    PRINT "1-ENQUEUE/2-DEQUEUE/3-DISPLAY/4-REVERSE"
+    REPEAT
+        PRINT "Enter your Choice: "
+        INPUT ch
+        SWITCH ch
+            CASE 1
+                PRINT "Enter the item to be enqueued: "
+                INPUT item
+                Enqueue(item)
+            CASE 2
+                Dequeue()
+            CASE 3
+                Display()
+            CASE 4
+                Reverse()
+        END SWITCH
+    UNTIL ch > 4
+END OF FUNCTION

@@ -1,0 +1,88 @@
+CONSTANT SIZE <- 5
+CONSTANT INVALID <- -99999
+
+VARIABLE Q[SIZE]
+VARIABLE f <- -1
+VARIABLE r <- -1
+
+START OF FUNCTION enque(item):
+    IF (r + 1) % SIZE EQUALS f THEN
+        PRINT "Queue is full"
+    ELSE
+        IF f EQUALS -1 THEN
+            f <- 0
+        END IF
+        r <- (r + 1) % SIZE
+        Q[r] <- item
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION deque():
+    IF r EQUALS -1 THEN
+        PRINT "Queue is empty"
+    ELSE
+        VARIABLE item <- Q[f]
+        f <- (f + 1) % SIZE
+        IF f EQUALS (r + 1) % SIZE THEN
+            f <- -1
+            r <- -1
+        END IF
+        RETURN item
+    END IF
+    RETURN INVALID
+END OF FUNCTION
+
+START OF FUNCTION display():
+    IF r EQUALS -1 THEN
+        PRINT "Queue Empty"
+        RETURN
+    END IF
+
+    PRINT "Elements of the Queue are: "
+    VARIABLE i
+    IF f <= r THEN
+        FOR i FROM f TO r:
+            PRINT Q[i] + " "
+        END FOR
+    ELSE
+        FOR i FROM f TO SIZE - 1:
+            PRINT Q[i] + " "
+        END FOR
+        FOR i FROM 0 TO r:
+            PRINT Q[i] + " "
+        END FOR
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION main():
+    VARIABLE choice <- 0
+    VARIABLE item
+
+    PRINT "1 - Enque\n2 - Deque\n3 - Display\n4 - Exit"
+
+    REPEAT
+        PRINT "Enter the choice : "
+        INPUT choice
+        SWITCH choice:
+            CASE 1:
+                PRINT "Enter Element: "
+                INPUT item
+                enque(item)
+                BREAK
+            CASE 2:
+                item <- deque()
+                IF item NOT EQUALS INVALID THEN
+                    PRINT "Dequed element : " + item
+                END IF
+                BREAK
+            CASE 3:
+                display()
+                BREAK
+            CASE 4:
+                PRINT "Exiting"
+                BREAK
+            DEFAULT:
+                PRINT "INVALID CHOICE"
+        END SWITCH
+    UNTIL choice > 4
+END OF FUNCTION

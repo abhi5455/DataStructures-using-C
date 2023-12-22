@@ -1,0 +1,19 @@
+1-ENQUEUE/2-DEQUEUE/3-DISPLAY/4-REVERSE
+Enter your Choice: 1
+Enter the item to be enqueued: 13
+Enter your Choice: 1
+Enter the item to be enqueued: 343
+Enter your Choice: 1
+Enter the item to be enqueued: 4
+Enter your Choice: 1
+Enter the item to be enqueued: 43
+Enter your Choice: 2
+Item dequeued is 13
+Enter your Choice: 3
+Elements of the queue are
+343 4 43
+Enter your Choice: 4
+Queue after reversing is
+Elements of the queue are
+43 4 343
+Enter your Choice:

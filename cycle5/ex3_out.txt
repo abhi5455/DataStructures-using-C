@@ -1,0 +1,13 @@
+1-PUSH
+2-POP
+3-DISPLAY
+Enter your choice: 1
+Enter the value to be pushed: 10
+Enter your choice: 1
+Enter the value to be pushed: 20
+Enter your choice: 1
+Enter the value to be pushed: 30
+Enter your choice: 2
+Removed  Element : 30
+Enter your choice: 3
+Elements of stack are: 20 10

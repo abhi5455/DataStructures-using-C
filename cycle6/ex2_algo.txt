@@ -1,0 +1,143 @@
+STRUCT TreeNode
+    INT data
+    TreeNode left
+    TreeNode right
+END OF FUNCTION
+
+START OF FUNCTION CreateNode(value)
+    TreeNode newNode
+    newNode.data <- value
+    newNode.left <- NULL
+    newNode.right <- NULL
+    RETURN newNode
+END OF FUNCTION
+
+START OF FUNCTION InsertNode(root, value)
+    IF root == NULL THEN
+        RETURN CreateNode(value)
+    END IF
+    IF value < root.data THEN
+        root.left <- InsertNode(root.left, value)
+    ELSE IF value > root.data THEN
+        root.right <- InsertNode(root.right, value)
+    END IF
+    RETURN root
+END OF FUNCTION
+
+START OF FUNCTION InorderTraversal(root)
+    IF root != NULL THEN
+        InorderTraversal(root.left)
+        PRINT root.data, " "
+        InorderTraversal(root.right)
+END OF FUNCTION
+
+START OF FUNCTION PreorderTraversal(root)
+    IF root != NULL THEN
+        PRINT root.data, " "
+        PreorderTraversal(root.left)
+        PreorderTraversal(root.right)
+END OF FUNCTION
+
+START OF FUNCTION PostorderTraversal(root)
+    IF root != NULL THEN
+        PostorderTraversal(root.left)
+        PostorderTraversal(root.right)
+        PRINT root.data, " "
+END OF FUNCTION
+
+START OF FUNCTION DeleteNode(root, value)
+    IF root == NULL THEN
+        RETURN root
+    END IF
+    IF root.data > value THEN
+        root.left <- DeleteNode(root.left, value)
+    ELSE IF root.data < value THEN
+        root.right <- DeleteNode(root.right, value)
+    ELSE
+        IF root.left == NULL THEN
+            TreeNode temp <- root.right
+            FREE(root)
+            RETURN temp
+        ELSE IF root.right == NULL THEN
+            TreeNode temp <- root.left
+            FREE(root)
+            RETURN temp
+        END IF
+        TreeNode succParent <- root
+        TreeNode succ <- root.right
+        WHILE succ.left != NULL DO
+            succParent <- succ
+            succ <- succ.left
+        END WHILE
+        root.data <- succ.data
+        IF succParent != root THEN
+            succParent.left <- DeleteNode(succParent.left, succ.data)
+        ELSE
+            succParent.right <- DeleteNode(succParent.right, succ.data)
+        END IF
+    END IF
+    RETURN root
+END OF FUNCTION
+
+START OF FUNCTION CountLeafNodes(root)
+    IF root == NULL THEN
+        RETURN 0
+    END IF
+    IF root.left == NULL AND root.right == NULL THEN
+        RETURN 1
+    END IF
+    RETURN CountLeafNodes(root.left) + CountLeafNodes(root.right)
+END OF FUNCTION
+
+START OF FUNCTION SortInputNumbers(root)
+    InorderTraversal(root)
+END OF FUNCTION
+
+START OF FUNCTION Main()
+    TreeNode root <- NULL
+    INT choice, value
+        PRINT "1. Insert a new node"
+        PRINT "2. Inorder traversal"
+        PRINT "3. Preorder traversal"
+        PRINT "4. Postorder traversal"
+        PRINT "5. Delete a node"
+        PRINT "6. Find the number of leaf nodes"
+        PRINT "7. Sort the input numbers"
+        PRINT "8. Exit"
+    REPEAT
+        PRINT "Enter your choice(1/2/3/4/5/6/7/8): "
+        INPUT choice
+        SWITCH choice
+            CASE 1
+                PRINT "Enter the value to insert: "
+                INPUT value
+                root <- InsertNode(root, value)
+            CASE 2
+                PRINT "Inorder traversal: "
+                InorderTraversal(root)
+                PRINT "\n"
+            CASE 3
+                PRINT "Preorder traversal: "
+                PreorderTraversal(root)
+                PRINT "\n"
+            CASE 4
+                PRINT "Postorder traversal: "
+                PostorderTraversal(root)
+                PRINT "\n"
+            CASE 5
+                PRINT "Enter the value to be deleted: "
+                INPUT value
+                root <- DeleteNode(root, value)
+            CASE 6
+                PRINT "Number of leaf nodes: ", CountLeafNodes(root), "\n"
+            CASE 7
+                PRINT "Sorted input numbers: "
+                SortInputNumbers(root)
+                PRINT "\n"
+            CASE 8
+                PRINT "Exiting program...\n"
+            OTHERWISE
+                PRINT "Invalid choice\n"
+        END SWITCH
+    UNTIL choice == 8
+END OF FUNCTION

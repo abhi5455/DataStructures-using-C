@@ -1,0 +1,163 @@
+STRUCT Node
+    INT num
+    CHAR name[50]
+    INT mark
+    NODE link
+
+NODE head <- NULL
+
+START OF FUNCTION VOID insert(INT n, CHAR s[], INT m)
+    NODE newnode <- ALLOCATE(sizeof(Node))
+    IF newnode == NULL
+        PRINT "Memory Underflow"
+        RETURN
+
+    IF head == NULL
+        head <- newnode
+        head.num <- n
+        COPY s TO head.name
+        head.mark <- m
+        head.link <- NULL
+    ELSE
+        newnode.num <- n
+        COPY s TO newnode.name
+        newnode.mark <- m
+        newnode.link <- head
+        head <- newnode
+END OF FUNCTION
+
+START OF FUNCTION VOID Delete()
+    NODE ptr, temp, ptr1
+    INT key, n
+
+    IF head == NULL
+        PRINT "List is empty"
+        RETURN
+
+    PRINT "Enter the number to be deleted: "
+    INPUT key
+
+    IF head.num == key
+        temp <- head
+        head <- head.link
+        n <- temp.num
+        FREE(temp)
+        PRINT "Deleted number is", n
+        RETURN
+
+    ptr <- head
+    WHILE ptr != NULL AND ptr.num != key
+        temp <- ptr
+        ptr <- ptr.link
+
+    IF ptr == NULL
+        PRINT "Can't find number"
+        RETURN
+
+    n <- ptr.num
+    ptr1 <- ptr.link
+    temp.link <- ptr1
+    FREE(ptr)
+    PRINT "Deleted student is of number", n
+END OF FUNCTION
+
+START OF FUNCTION VOID search()
+    NODE ptr
+    CHAR s[50]
+
+    PRINT "Enter the name to be searched: "
+    INPUT s
+
+    ptr <- head
+    WHILE ptr != NULL
+        IF STRCMP(ptr.name, s) == 0
+            PRINT "Found"
+            PRINT "Number:", ptr.num
+            PRINT "Name:", ptr.name
+            PRINT "Mark:", ptr.mark
+            RETURN
+        ELSE
+            ptr <- ptr.link
+
+    IF ptr == NULL
+        PRINT "No student of the given name"
+END OF FUNCTION
+
+START OF FUNCTION VOID display()
+    NODE ptr
+
+    IF head == NULL
+        PRINT "Nothing to print"
+        RETURN
+
+    ptr <- head
+    WHILE ptr.link != NULL
+        PRINT "Number:", ptr.num
+        PRINT "Name:", ptr.name
+        PRINT "Mark:", ptr.mark
+        ptr <- ptr.link
+
+    PRINT "Number:", ptr.num
+    PRINT "Name:", ptr.name
+    PRINT "Mark:", ptr.mark
+END OF FUNCTION
+
+START OF FUNCTION VOID sort()
+    NODE ptr1, ptr2
+    INT n, temp, marktemp
+    CHAR stemp[50]
+
+    PRINT "Enter the number of nodes: "
+    INPUT n
+
+    FOR i <- 0 TO n-1
+        ptr1 <- head
+        ptr2 <- ptr1.link
+        FOR j <- 0 TO n-i-1
+            IF ptr1.num > ptr2.num
+                temp <- ptr1.num
+                ptr1.num <- ptr2.num
+                ptr2.num <- temp
+
+                COPY ptr1.name TO stemp
+                COPY ptr2.name TO ptr1.name
+                COPY stemp TO ptr2.name
+
+                marktemp <- ptr1.mark
+                ptr1.mark <- ptr2.mark
+                ptr2.mark <- marktemp
+
+            ptr1 <- ptr2
+            ptr2 <- ptr2.link
+
+    PRINT "Sorted successfully"
+    display()
+END OF FUNCTION
+
+START OF FUNCTION main()
+    INT choice <- 1
+    INT num, mark
+    CHAR name[50]
+
+    PRINT "1-Insert at beginning\n2-Delete based on number\n3-Search based on num/name\n4-Sort based on number\n5-Display"
+    DO
+        PRINT "Enter your choice: "
+        INPUT choice
+        SWITCH choice
+            CASE 1
+                PRINT "Enter number, name, and total mark: "
+                INPUT num, name, mark
+                insert(num, name, mark)
+            CASE 2
+                Delete()
+            CASE 3
+                search()
+            CASE 4
+                sort()
+            CASE 5
+                display()
+            DEFAULT
+                PRINT "Invalid choice"
+        END SWITCH
+    WHILE choice <= 5
+END OF FUNCTION

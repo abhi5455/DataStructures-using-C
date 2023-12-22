@@ -1,0 +1,63 @@
+START OF FUNCTION StringLength(s):
+    VARIABLE len <- 0
+    WHILE s[len] NOT EQUALS '\0' DO
+        len <- len + 1
+    END WHILE
+    RETURN len
+END OF FUNCTION
+
+START OF FUNCTION StringCopy(s1, s2):
+    VARIABLE i, len <- StringLength(s1)
+    FOR i FROM 0 TO len - 1 DO
+        s2[i] <- s1[i]
+    END FOR
+END OF FUNCTION
+
+START OF FUNCTION StringCompare(s1, s2):
+    VARIABLE i <- 0
+    VARIABLE c1 <- s1[i], c2 <- s2[i]
+
+    WHILE c1 NOT EQUALS '\0' AND c2 NOT EQUALS '\0' DO
+        c1 <- s1[i]
+        c2 <- s2[i]
+
+        IF c1 > c2 THEN
+            RETURN 1
+        ELSE IF c1 < c2 THEN
+            RETURN -1
+        END IF
+
+        i <- i + 1
+    END WHILE
+
+    RETURN 0
+END OF FUNCTION
+
+START OF FUNCTION StringConcat(s1, s2):
+    VARIABLE i, j <- 0
+    FOR i FROM StringLength(s1) TO StringLength(s1) + StringLength(s2) - 1 DO
+        s1[i] <- s2[j]
+        j <- j + 1
+    END FOR
+END OF FUNCTION
+
+START OF FUNCTION main():
+    ARRAY str1[100], str2[100], strcp[200]
+
+    PRINT "Enter string 1: "
+    INPUT str1
+
+    PRINT "Enter string 2: "
+    INPUT str2
+
+    PRINT "Length of string 1 = " + StringLength(str1)
+    PRINT "Length of string 2 = " + StringLength(str2)
+
+    CALL StringCopy(str1, strcp)
+    PRINT "Copied string 1 is: " + strcp
+
+    PRINT "Comparison of str1 and str2 is " + StringCompare(str1, str2)
+
+    CALL StringConcat(str1, str2)
+    PRINT "Concated str1 and str2 is " + str1
+END OF FUNCTION

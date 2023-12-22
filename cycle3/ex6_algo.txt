@@ -1,0 +1,91 @@
+CONSTANT MAX_SIZE <- 50
+STRUCTURE Node:
+    INTEGER data
+    INTEGER priority
+
+ARRAY queue[MAX_SIZE]
+VARIABLE front <- -1
+VARIABLE rear <- -1
+
+START OF FUNCTION insert(data, priority):
+    IF rear EQUALS MAX_SIZE - 1 THEN
+        PRINT "Queue overflow!"
+        RETURN
+    END IF
+
+    IF front EQUALS -1 AND rear EQUALS -1 THEN
+        front <- rear <- 0
+        queue[rear].data <- data
+        queue[rear].priority <- priority
+    ELSE
+        VARIABLE i, j
+
+        FOR i FROM front TO rear DO
+            IF priority > queue[i].priority THEN
+                FOR j FROM rear + 1 DOWNTO i DO
+                    queue[j].data <- queue[j - 1].data
+                    queue[j].priority <- queue[j - 1].priority
+                END FOR
+                queue[i].data <- data
+                queue[i].priority <- priority
+                rear <- rear + 1
+                RETURN
+            END IF
+        END FOR
+
+        rear <- rear + 1
+        queue[rear].data <- data
+        queue[rear].priority <- priority
+    END IF
+END OF FUNCTION
+
+START OF FUNCTION delete():
+    IF front EQUALS -1 OR front > rear THEN
+        PRINT "Queue underflow!"
+        RETURN
+    END IF
+
+    PRINT "Deleted element: " + queue[front].data + " having priority " + queue[front].priority
+    front <- front + 1
+END OF FUNCTION
+
+START OF FUNCTION display():
+    IF front EQUALS -1 OR front > rear THEN
+        PRINT "Queue is empty!"
+        RETURN
+    END IF
+
+    VARIABLE i
+    PRINT "Priority Queue (Element, Priority): "
+    FOR i FROM front TO rear DO
+        PRINT "(" + queue[i].data + ", " + queue[i].priority + ")  "
+    END FOR
+    PRINT "\n"
+END OF FUNCTION
+
+START OF FUNCTION main():
+    INTEGER item, priority, choice
+
+    PRINT "1- Insert\n2- Delete\n3- Display"
+
+    REPEAT
+        PRINT "Enter your choice: "
+        INPUT choice
+        SWITCH choice:
+            CASE 1:
+                PRINT "Enter the element and its priority: "
+                INPUT item, priority
+                CALL insert(item, priority)
+                BREAK
+            CASE 2:
+                CALL delete()
+                BREAK
+            CASE 3:
+                CALL display()
+                BREAK
+            DEFAULT:
+                PRINT "INVALID CHOICE"
+        END SWITCH
+    UNTIL choice > 3
+    RETURN 0
+END OF FUNCTION

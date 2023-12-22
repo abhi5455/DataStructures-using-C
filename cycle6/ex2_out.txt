@@ -1,0 +1,40 @@
+1. Insert node
+2. Inorder
+3. Preorder
+4. Postorder
+5. Delete node
+6. No of leaf nodes
+7. Sort inputs
+8. Exit
+Choice: 1
+Enter value: 10
+Choice: 1
+Enter value: 20
+Choice: 1
+Enter value: 5
+Choice: 1
+Enter value: 4
+Choice: 1
+Enter value: 6
+Choice: 1
+Enter value: 9
+Choice: 1
+Enter value: 12
+Choice: 1
+Enter value: 15
+Choice: 2
+Inorder traversal: 4 5 6 9 10 12 15 20
+Choice: 3
+Preorder traversal: 10 5 4 6 9 20 12 15
+Choice: 4
+Postorder traversal: 4 9 6 5 15 12 20 10
+Choice: 5
+Enter key: 12
+Choice: 2
+Inorder traversal: 4 5 6 9 10 15 20
+Choice: 6
+Number of leaf nodes: 3
+Choice: 7
+Sorted input numbers: 4 5 6 9 10 15 20
+Choice: 8
+Exiting program...

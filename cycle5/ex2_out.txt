@@ -1,0 +1,2 @@
+Enter a string: malayalam
+The string is a palindrome.

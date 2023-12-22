@@ -1,0 +1,17 @@
+1- Insert
+2- Delete
+3- Display
+Enter your choice: 1
+Enter the element and its priority: 10 2
+Enter your choice: 1
+Enter the element and its priority: 30 5
+Enter your choice: 1
+Enter the element and its priority: 50 3
+Enter your choice: 2
+Deleted element: 30 having priority 5
+Enter your choice: 2
+Deleted element: 50 having priority 3
+Enter your choice: 2
+Deleted element: 10 having priority 2
+Enter your choice: 3
+Queue is empty!

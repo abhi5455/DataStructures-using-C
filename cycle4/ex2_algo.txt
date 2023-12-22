@@ -1,0 +1,122 @@
+STRUCT Tuple
+    INT row, col, val
+
+START OF FUNCTION CreateSparse(matrix, sparseArray, rows, cols)
+    INT k <- 1
+    FOR i FROM 0 TO rows - 1 DO
+        FOR j FROM 0 TO cols - 1 DO
+            IF matrix[i][j] != 0 THEN
+                sparseArray[k].row <- i
+                sparseArray[k].col <- j
+                sparseArray[k].val <- matrix[i][j]
+                k <- k + 1
+            END IF
+        END FOR
+    END FOR
+    sparseArray[0].row <- rows
+    sparseArray[0].col <- cols
+    sparseArray[0].val <- k - 1
+END OF FUNCTION
+
+START OF FUNCTION DisplaySparse(sparseArray)
+    PRINT "Sparse matrix"
+    FOR i FROM 0 TO sparseArray[0].val DO
+        PRINT sparseArray[i].row, " ", sparseArray[i].col, " ", sparseArray[i].val
+    END FOR
+END OF FUNCTION
+
+START OF FUNCTION Transpose(sparseArray, transposedArray)
+    INT n <- sparseArray[0].val
+    transposedArray[0].col <- sparseArray[0].row
+    transposedArray[0].row <- sparseArray[0].col
+    transposedArray[0].val <- n
+    INT q <- 1
+    FOR i FROM 0 TO sparseArray[0].col - 1 DO
+        FOR j FROM 1 TO n DO
+            IF sparseArray[j].col == i THEN
+                transposedArray[q].col <- sparseArray[j].row
+                transposedArray[q].row <- sparseArray[j].col
+                transposedArray[q].val <- sparseArray[j].val
+                q <- q + 1
+            END IF
+        END FOR
+    END FOR
+END OF FUNCTION
+
+START OF FUNCTION AddSparse(matrix1, matrix2, resultMatrix)
+    INT i, j, k
+    i <- j <- k <- 1
+    WHILE i <= matrix1[0].val AND j <= matrix2[0].val DO
+        IF matrix1[i].row > matrix2[j].row OR (matrix1[i].row == matrix2[j].row AND matrix1[i].col > matrix2[j].col) THEN
+            resultMatrix[k].row <- matrix2[j].row
+            resultMatrix[k].col <- matrix2[j].col
+            resultMatrix[k].val <- matrix2[j].val
+            k <- k + 1
+            j <- j + 1
+        ELSE IF matrix1[i].row < matrix2[j].row OR (matrix1[i].row == matrix2[j].row AND matrix1[i].col < matrix2[j].col) THEN
+            resultMatrix[k].row <- matrix1[i].row
+            resultMatrix[k].col <- matrix1[i].col
+            resultMatrix[k].val <- matrix1[i].val
+            k <- k + 1
+            i <- i + 1
+        ELSE
+            resultMatrix[k].row <- matrix2[j].row
+            resultMatrix[k].col <- matrix2[j].col
+            resultMatrix[k].val <- matrix1[i].val + matrix2[j].val
+            k <- k + 1
+            i <- i + 1
+            j <- j + 1
+        END IF
+    END WHILE
+    WHILE i <= matrix1[0].val DO
+        resultMatrix[k].row <- matrix1[i].row
+        resultMatrix[k].col <- matrix1[i].col
+        resultMatrix[k].val <- matrix1[i].val
+        k <- k + 1
+        i <- i + 1
+    END WHILE
+    WHILE j <= matrix2[0].val DO
+        resultMatrix[k].row <- matrix2[j].row
+        resultMatrix[k].col <- matrix2[j].col
+        resultMatrix[k].val <- matrix2[j].val
+        k <- k + 1
+        j <- j + 1
+    END WHILE
+    resultMatrix[0].val <- k - 1
+END OF FUNCTION
+
+START OF FUNCTION Main()
+    INT m1[10][10], m2[10][10], m, n, p, q, i, j
+    Tuple a[20], b[20], c[30], at[20], bt[20]
+    PRINT "Enter the rows and columns of the 1st matrix: "
+    INPUT m, n
+    PRINT "Enter the elements of the 1st matrix: "
+    FOR i FROM 0 TO m - 1 DO
+        FOR j FROM 0 TO n - 1 DO
+            INPUT m1[i][j]
+        END FOR
+    END FOR
+    PRINT "Enter the rows and columns of the 2nd matrix: "
+    INPUT p, q
+    PRINT "Enter the elements of the 2nd matrix: "
+    FOR i FROM 0 TO p - 1 DO
+        FOR j FROM 0 TO q - 1 DO
+            INPUT m2[i][j]
+        END FOR
+    END FOR
+    CreateSparse(m1, a, m, n)
+    CreateSparse(m2, b, p, q)
+    Transpose(a, at)
+    Transpose(b, bt)
+    DisplaySparse(at)
+    PRINT "\n"
+    DisplaySparse(bt)
+    PRINT "\n"
+    IF m != p OR n != q THEN
+        PRINT "Addition not possible"
+    ELSE
+        PRINT "Added "
+        AddSparse(a, b, c)
+        DisplaySparse(c)
+    END IF
+END OF FUNCTION
