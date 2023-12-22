@@ -1,2 +1,1 @@
-# DataStructures-using-C
-KTU S3 DataStructures Lab
+# DataStructures-using-C KTU S3
