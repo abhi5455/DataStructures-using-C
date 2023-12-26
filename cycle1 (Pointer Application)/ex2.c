@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 void findLongestSubstring(char *str) {
 	int n = 0, maxLength = 0, start = 0, longestStart = 0, i;
 	while (str[n] != '\0')
