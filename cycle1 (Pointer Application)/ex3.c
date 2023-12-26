@@ -1,4 +1,5 @@
 #include<stdio.h>
+
 void main() {
 	int arr[20], n, *ptr, i;
 	printf("Enter the no of Elements: ");
