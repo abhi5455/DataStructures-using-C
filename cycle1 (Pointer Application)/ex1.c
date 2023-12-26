@@ -1,5 +1,4 @@
 #include <stdio.h>
-
 int main() {
 	int m, n, A[30], B[30], C[60], i = 0, j = 0, k = 0;;
 
