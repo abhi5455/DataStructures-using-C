@@ -103,4 +103,17 @@
      5. Delete a node
      6. Find the number of leaf nodes
      7. Sort the input numbers
-      
+        
+### Cycle - 7 (Graph)
+
+1. Represent any given graph and perform depth first search and breadth first search.
+
+### Cycle - 8 (Sorting)
+
+1. Implement bubble sort, insertion sort, selection sort, quick sort, merge sort and heap sort.
+
+### Cycle - 9 (Hashing)
+
+1.Implement a hash table using the chaining method. Use Linear Probing for collision resolution.
+
+
