@@ -114,6 +114,6 @@
 
 ### Cycle - 9 (Hashing)
 
-1.Implement a hash table using the chaining method. Use Linear Probing for collision resolution.
+1. Implement a hash table using the chaining method. Use Linear Probing for collision resolution.
 
 
