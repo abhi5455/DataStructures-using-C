@@ -8,11 +8,11 @@
 2. Given a string s, write a C program to find the length of the longest substring without repeating characters. Also, display the substring.
 3. Write a program to find the smallest number in a list of integers using pointers
 4. Implement the following string library functions using pointers:
-     1.string length (`int StringLength (char *s)`)
-     2. string copy (`void StringCopy(char *s1, char *s2)`)
-     3. string comparison (`int StringCompare (char *s1, char *s2)`)
-     4. string concatenation (`void StringConcat(char *s1, char *s2)`)
-6. Implement bubble sort without using an array (Use pointers instead)
+     1. String length
+     2. String copy
+     3. String comparison
+     4. String concatenation 
+6. Implement bubble sort without using an array (Use pointers instead).
 
 
 ### Cycle - 2 (Search Operations)
