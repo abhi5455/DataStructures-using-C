@@ -10,7 +10,7 @@ END OF FUNCTION
 
 START OF FUNCTION CHARACTER Pop(s, top):
     IF top = -1 THEN
-        RETURN '\0'
+        RETURN '\0' 
     ELSE
         top <- top - 1
         RETURN s[top + 1]
