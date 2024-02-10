@@ -1,8 +1,3 @@
-/*
- To implement dfs and bfs on a graph
- Jithin Raj S R, S3, CSE
- Roll no - 74
-*/
 #include<stdio.h>
 #include<stdlib.h>
 #define MAX 10
@@ -113,5 +108,5 @@ void main(){
         	        bfs(list,adj,key,size);
 		}
 		key=-1;
-}
+ }
 }
