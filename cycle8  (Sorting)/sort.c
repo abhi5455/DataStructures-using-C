@@ -1,8 +1,3 @@
-/*
- To implement various sorting technics on an array
- Jithin Raj S R, S3, CSE
- Roll no - 74
-*/
 #include<stdio.h>
 
 #define MAX 10
